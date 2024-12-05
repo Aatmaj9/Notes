@@ -1,0 +1,333 @@
+\documentclass{book}
+\usepackage{amsmath} % For advanced mathematical typesetting
+\usepackage{graphicx} % For including graphics
+\usepackage{amssymb} % For mathematical symbols
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{float}
+\usepackage{array}
+
+\begin{document} 
+\tableofcontents
+\part{Mechanical Vibrations}
+\chapter{Vibration of sinlge DOF System}
+\section{Free Undamped harmonic motion}
+Let us consider freee undamped vibration of SDOF>
+
+\[ m \ddot{x} + kx =0\]
+
+Let \( \omega^2 = k/m\)
+\[ \ddot{x}(t) + \omega^2 x(t) = 0\]
+
+Let us assume the solution to be - \( x(t) = Ce^{\lambda t}\)
+Substituting into equation of motion we get - 
+\[ (\lambda^2 + \omega^2) C e^{\lambda t} = 0\] 
+The equation is valid for all t if - 
+\[ \lambda^2 + \omega^2 = 0\]
+\[ \lambda = \pm i\omega \]
+\[ x(t) = C_1e^{i\omega t} + C_2 e^{-i \omega t}\] 
+\[ x(t) = (C_1 + C_2) cos \omega t + i (C_1 - C_2) sin \omega t\]
+
+\(C_1\) and \( C_2\) are constants and both are complex numbers but since x(t)should be real \(C_1\) and \(C_2\) should be complex conjugates.
+
+\[ C_1 = a+ib \ \  and \ \ C_2 = a-ib\]
+\[ x(t) = A cos \omega t + B sin \omega t\]
+
+We can get these constants from the inital conitions. x(t) = 0 and \(\dot{x}(0) = 0\)
+
+\[ A = x(0) \ \ and \ \ B = \dot{x}(0)/ \omega \]
+
+We can rewrite the solution in the form - 
+
+\[ x(t) = C cos( \omega t - \phi) \] 
+
+where 
+
+\[ C = \sqrt{A^2 + B^2 } \ \ and \ \ \phi = tan^{-1}\frac{B}{A} \]
+
+
+\section{Driven undamped harmonic motion}
+\[m\ddot{x} + kx = F(t)\]
+\[\ddot{x} + \omega^2{x} = F(t)/m\]
+The general solution of this equation is superposition of two solutions - Particular solutioon and complementary solution.\\
+
+\noindent
+Particular solution \( x_p(t)\) is obtained by solving the equation \(\ddot{x} + \omega^2{x} = F(t)/m \)\\
+
+
+\noindent
+Complimentary solution \(x_c(t)\) is obtained by solving the equation \(\ddot{x} + \omega^2{x} = 0 \)\\
+
+\noindent
+Consider the external force \( F(t) = F_d \ sin \ \omega_d t \)\\
+We assume particular solution of the form - 
+
+\[ x_p(t) = A \ sin \ \omega_d t \]
+\[ \ddot{x}_p(t) =- A \omega_d^2 \ sin \ \omega_d t \]
+
+\[ - A \omega_d^2 \ sin \ \omega_d t + \omega^2  A \ sin \ \omega_d t = F sin (\omega_d t) \] 
+where \(F = F_d/m\)
+
+\[ A = \frac{F}{ \omega^2 - \omega_d^2} = \frac{F_d}{m\omega^2(1 - (\frac{\omega_d}{\omega})^2 )} = \frac{F_d}{k ( 1 - \beta^2)} \]
+
+\[ x_p(t) = \frac{F_d}{k ( 1 - \beta^2)} sin \ (\omega_d t )\]
+
+The displaceement corresponding to the static application of the external load \( F_d\) is called statuc displacement.
+\[ x_{st} = \frac{F_d}{k}\]
+Dynamic amplication factor or magnification factor is ratio of amplitude of motion to the static displacement.
+
+Dynamic response factor - 
+\begin{tcolorbox}[colback=yellow!40!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+\[ R_d = \frac{ 1}{1 - \beta^2} \]
+\end{tcolorbox}
+
+\section{Free Damped harmonic motion}
+Let a mass m be subjected to drag force proportional to velocity \(F_f = -bv\)
+\[ F = -b\dot{x} -kx\]
+\[ m\ddot{x} + b\dot{x} +kx = 0\]
+\[ \ddot{x} + 2\gamma \dot{x} + \omega^2x =0\]
+We guess the solution to be \(x=Ae^{\alpha t}\)
+\[ \alpha^2 + 2\gamma \alpha + \omega^2 =0\]
+\[ \alpha = - \gamma \pm \sqrt{\gamma^2 - \omega^2}\]
+Sum of 2 different solutions is again a solution to a equation is the property of linear differential equation.
+Hence the general solution is -
+\[ x(t) = Ae^{\alpha_1 t} + Be^{\alpha_2 t}\]
+\[ x(t) = e^{-\gamma t}(Ae^{t\sqrt{\gamma^2 - \omega^2}} + Be^{-t\sqrt{\gamma^2 - \omega^2}})\]
+\[ x(t) = e^{-\gamma t}(Ae^{\Omega t} + Be^{-\Omega t}) \ \  where \ \ \Omega^2 = \gamma^2 - \omega^2\]
+
+\subsection{Underdamping}
+Underdamping occurs when \(\Omega^2 < 0\). Since \(\Omega\) is imaginary we define \(\Omega = i \overline{\omega} = i\sqrt{\omega^2 - i^2}\)
+\[ x(t) =e^{-\gamma t} (Ae^{i\overline{\omega} t} + Be^{-i\overline{\omega} t})\]
+\[x(t) = C e^{-\gamma t} cos(\overline{\omega} t + \phi_0)\]
+\subsection{Overdamping}
+
+Overdamping occurs when  \(\Omega^2 > 0\).  \(\Omega\) is real and positive.
+
+\[ x(t)  = e^{-\gamma t}(Ae^{\Omega t} + Be^{-\Omega t}) \]
+There is no oscillatory motion in this case.
+\subsection{Critical damping}
+In this case \(\Omega =0\) and \(\gamma = \omega\). We have only one solution here \( x(t) = e^{- \gamma t} \)\\
+
+\noindent
+Note: From theory of differential equations we have another solution - \( x(t) = t e^{ -\gamma t} \) 
+
+\[ x(t) = e^{-\gamma t}( A + Bt) \]
+
+For critical damping the motion converges to 0 the quickest, for overdamping the motion is slower. In both these cases no oscillation is present.
+Only in underdamping oscillatory motion is present.
+
+
+
+\section{Driven damped harmonic motion}
+The system is driven by a external force F(t).
+
+The equation which represents driven damped harmonic motion is -
+\[ m\ddot{x} + b\dot{x} +kx = F(t)\]
+We can rewrite the above equation as - 
+\[ \ddot{x} + 2\gamma \dot{x} + \omega^2 x = f(t)\]
+where f(t) = F(t)/m.
+
+
+Let us consider \(f(t) = C_0e^{i\omega_0 t}\) for the ease of solving
+We get the general solution for x by the priciple of superposition - by adding the solutions for the equations
+\[ \ddot{x} + 2\gamma \dot{x} + \omega^2 x = C_0e^{i\omega_0 t} \ \ and \ \ \ddot{x} + 2\gamma \dot{x} + \omega^2 x = 0  \]
+
+We try thr solution \(x(t) = Ae^{i\omega_0 t}\) for solving the equation - 
+\[\ddot{x} + 2\gamma \dot{x} + \omega^2 x = C_0e^{i\omega_0 t}\]
+Substituting and solving we get - 
+\[ A = \left(\frac{C_0}{-\omega_0^2 + 2i\gamma \omega + \omega^2}\right) \]
+\[ x_p(t) = \left(\frac{C_0}{-\omega_0^2 + 2i\gamma \omega + \omega^2}\right) e^{iw_0t}\]
+This called the particular solution and is denoted by \(x_p(t)\) while the other solution is called
+complimentary solution and is denoted by \(x_c(t)\). We have already computed general solution for \(x_c(t)\) 
+
+\[x(t) = x_c(t)  + x_p(t)\]
+Hnece we can write the general solution as - 
+
+\begin{tcolorbox}[colback=pink!30!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+    \[ x(t) =  e^{-\gamma t}(Ae^{\Omega t} + Be^{-\Omega t}) + \left(\frac{C_0}{-\omega_0^2 + 2i\gamma \omega + \omega^2}\right) e^{iw_0t}\]
+\end{tcolorbox}
+
+We are more interested in a more general form of driving force \(F(t) = F_d cos(w_d t)\). Let us see how to go about solving such harmonic motion.
+
+\[ \ddot{x} + 2\gamma \dot{x} + \omega^2 x = \frac{F(t)}{m}\]
+\[ \ddot{x} + 2\gamma \dot{x} + \omega^2 x = \frac{F_d}{m} cos(w_d t)\]
+\[ \ddot{x} + 2\gamma \dot{x} + \omega^2 x = F cos(w_d t)\]
+\[ \ddot{x} + 2\gamma \dot{x} + \omega^2 x = \frac{F}{2} e^{iw_d t} + \frac{F}{2} e^{-iw_d t} \]
+
+Using method of superposition we can add the solutions for the two terms on the RHS 
+\[ x_p(t)= \left( \frac{F/2}{-\omega_d^2 + 2 i \gamma \omega_d + \omega^2} \right) e^{i\omega_d t} + \left( \frac{F/2}{-\omega_d^2 - 2 i \gamma \omega_d + \omega^2} \right) e^{-i\omega_d t}\]
+\[ x_p(t) = \left( \frac{F(\omega^2 - \omega_d^2)}{(\omega^2 - \omega_d^2) + 4\gamma^2 \omega_d^2} + \right) cos(\omega_d t) + \left( \frac{2F\gamma \omega_d}{(\omega^2 - \omega_d^2) + 4\gamma^2 \omega_d^2} \right) sin(w_d t)\]
+Note that x(t) is real as it describes position.
+We now define :
+\[ R = \sqrt{(\omega^2 - \omega_d^2)^2 + (2 \gamma \omega_d)^2}\]
+\[x_p(t) = \frac{F}{R^2} \left[  (\omega^2 - \omega_d^2) cos(\omega_d t) + 2 \gamma \omega_d sin(w_d t)\right] \]
+\[ x_p(t) = \frac{F}{R} \left[  \frac{(\omega^2 - \omega_d^2)}{R} cos(\omega_d t) + \frac{2 \gamma \omega_d}{R} sin(w_d t)\right] \]
+\begin{tcolorbox}[colback=pink!30!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+    \[ x_p(t) = \frac{F}{R} cos(\omega_d t - \phi)\] 
+\end{tcolorbox}
+where we have - 
+\[ cos \phi = \frac{\omega^2 - \omega_d^2}{R} \ , \ sin \phi = \frac{2 \gamma \omega_d}{R} \ , \ tan \phi = \frac{2 \gamma \omega_d}{\omega^2 - \omega_d^2}\]
+\begin{tcolorbox}[colback=pink!30!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+\[ x(t)= C e^{-\gamma t} cos(\overline{\omega} t + \phi_0) + \frac{F}{R} cos(\omega_d t - \phi)\]
+For the case of underdamping.
+\end{tcolorbox}
+
+Note that the constant C here is calculated by using initial conditions.\\
+
+Let us write the solution x(t) in the form - 
+\begin{tcolorbox}[colback=pink!30!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+\[ x(t) =  e^{- \gamma t}[Acos(\overline{\omega} t) + B sin(\overline{\omega } t)] + \frac{F}{R} cos(\omega_d t - \phi)\]
+\end{tcolorbox}
+
+Now we calculate constsnts A dn B from initial conditions : \(x(0) = \dot{x}(0) = 0\)
+\[ x(0) = A + \frac{F}{R} cos \phi \] 
+\begin{tcolorbox}[colback=blue!20!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+\[ A = x(0) - \frac{F}{R}  cos \phi\] 
+\end{tcolorbox}
+\[ \dot{x}(t) =  -\gamma e^{- \gamma t}[ \ Acos\ \overline{\omega} t + B sin \ \overline{\omega } t \ ] + e^{\gamma t} [ \  - A \ \overline{\omega} \ sin \ \overline{\omega} t + \ B \ \overline{\omega} \ cos \ \overline{\omega} t] - \frac{F\omega_d}{R} sin(\omega_d t - \phi)\]
+\[ \dot{x}(0) = -\gamma A + B \ \overline{\omega} + \frac{F \omega_d}{R} sin \phi\]
+\[ \dot{x}(0) = -\gamma \left[ x(0) - \frac{F}{R} cos \phi \right] + B \ \overline{\omega} + \frac{F \omega_d}{R} sin \phi\]
+\begin{tcolorbox}[colback=blue!20!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+\[ B= \frac{\dot{x}(0) + \gamma x(0)} {\overline{\omega}} - \frac{F}{R \ \overline{\omega}} (\gamma cos \phi + \omega_d sin \phi) \]
+\end{tcolorbox}
+
+\noindent
+\textbf{Let us now look at the driving force of the form \(F(t) = F_d sin(\omega_d t) \)}
+
+\[ \ddot{x} + 2\gamma \dot{x} + \omega^2 x = \frac{F(t)}{m}\]
+\[ \ddot{x} + 2\gamma \dot{x} + \omega^2 x = \frac{F_d}{m} sin(w_d t)\]
+\[ \ddot{x} + 2\gamma \dot{x} + \omega^2 x = F sin(w_d t)\]
+\[ \ddot{x} + 2\gamma \dot{x} + \omega^2 x = \frac{F}{2i} e^{iw_d t} - \frac{F}{2i} e^{-iw_d t} \]
+
+Using method of superposition we can add the solutions for the two terms on the RHS 
+\[ x_p(t)= \left( \frac{F/2i}{-\omega_d^2 + 2 i \gamma \omega_d + \omega^2} \right) e^{i\omega_d t} - \left( \frac{F/2i}{-\omega_d^2 - 2 i \gamma \omega_d + \omega^2} \right) e^{-i\omega_d t}\]
+\[ x_p(t) = \left( \frac{F(\omega^2 - \omega_d^2)}{(\omega^2 - \omega_d^2) + 4\gamma^2 \omega_d^2} \right) sin(\omega_d t) - \left( \frac{2F\gamma \omega_d}{(\omega^2 - \omega_d^2) + 4\gamma^2 \omega_d^2} \right) cos(w_d t)\]
+Note that x(t) is real as it describes position.
+We now define :
+\[ R = \sqrt{(\omega^2 - \omega_d^2)^2 + (2 \gamma \omega_d)^2}\]
+\[x_p(t) = \frac{F}{R^2} \left[  (\omega^2 - \omega_d^2) sin(\omega_d t) - 2 \gamma \omega_d cos(w_d t)\right] \]
+\[ x_p(t) = \frac{F}{R} \left[  \frac{(\omega^2 - \omega_d^2)}{R} sin(\omega_d t) - \frac{2 \gamma \omega_d}{R} cos(w_d t)\right] \]
+\begin{tcolorbox}[colback=pink!30!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+    \[ x_p(t) = \frac{F}{R} sin(\omega_d t - \phi)\] 
+\end{tcolorbox}
+where we have - 
+\[ cos \phi = \frac{\omega^2 - \omega_d^2}{R} \ , \ sin \phi = \frac{2 \gamma \omega_d}{R} \ , \ tan \phi = \frac{2 \gamma \omega_d}{\omega^2 - \omega_d^2}\]
+
+\noindent
+\textbf{The above particular solution can also be derived from an alternate method - }
+
+Assume the solution in the form-
+\[ x_p(t) = C cos \omega_d t + D sin \omega_d t \] 
+\[ \dot{x}_p(t)= -C\omega_d \ sin \omega_d t + D \omega_d \ cos \omega_d t \]
+\[ \ddot{x}_p(t) = - C \omega_d^2 \ cos \omega_d t - D \omega_d^2 \ sin \omega_d t\]
+Substitute these in our equation - 
+\[ \ddot{x} + 2\gamma \dot{x} + \omega^2 x = F sin(w_d t)\]
+\noindent
+Equating cos and sin terms on lhs and rhs we get :
+\[ D( \omega^2 - \omega_d^2) - 2\gamma C \omega_d = F\] 
+\[ C (\omega^2 - \omega_d^2) +2 \gamma D \omega_d =0\] 
+Solving these 2 equations for C and D we have - 
+\[ C = - \frac{2 F \gamma \omega_d }{R^2}\] 
+\[ D = \frac{F}{R^2} ( \omega^2 - \omega_d^2) \]
+
+Hence we have - 
+\[ x_p(t) =  \frac{F}{R^2} ( \omega^2 - \omega_d^2)\ sin (\omega_d t)  - \frac{2 F \gamma \omega_d }{R^2} cos (\omega_d t)\]
+Which matches with the solution we derived earlier !
+
+\begin{tcolorbox}[colback=pink!30!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+\[ x(t)= C e^{-\gamma t} cos(\overline{\omega} t + \phi_0) + \frac{F}{R} sin(\omega_d t - \phi)\]
+For the case of underdamping.
+\end{tcolorbox}
+
+\noindent
+If there is damping in the system i.e \(\gamma > 0\) then the homogenous part of the solution goes 
+to zero for large t ans we are left only with particular solution. Hnece the system approaches 
+definite x(t) namely \(x_p(t) \) independent of initial conditions.
+
+\noindent
+Let us write the solution x(t) in the form - 
+\begin{tcolorbox}[colback=pink!30!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+\[ x(t) =  e^{- \gamma t}[Acos(\overline{\omega} t) + B sin(\overline{\omega } t)] + \frac{F}{R} sin(\omega_d t - \phi)\]
+\end{tcolorbox}
+
+Now we calculate constsnts A dn B from initial conditions : \(x(0) = \dot{x}(0) = 0\)
+\[ x(0) = A - \frac{F}{R} sin \phi \] 
+\begin{tcolorbox}[colback=blue!20!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+\[ A = x(0) + \frac{F}{R}  sin \phi\] 
+\end{tcolorbox}
+\[ \dot{x}(t) =  -\gamma e^{- \gamma t}[ \ Acos\ \overline{\omega} t + B sin \ \overline{\omega } t \ ] + e^{\gamma t} [ \  - A \ \overline{\omega} \ sin \ \overline{\omega} t + \ B \ \overline{\omega} \ cos \ \overline{\omega} t] + \frac{F\omega_d}{R} cos(\omega_d t - \phi)\]
+\[ \dot{x}(0) = -\gamma A + B \ \overline{\omega} + \frac{F \omega_d}{R} cos \phi\]
+\[ \dot{x}(0) = -\gamma \left[ x(0) + \frac{F}{R} sin \phi \right] + B \ \overline{\omega} + \frac{F \omega_d}{R} cos \phi\]
+\begin{tcolorbox}[colback=blue!20!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+\[ B= \frac{\dot{x}(0) + \gamma x(0)} {\overline{\omega}} + \frac{F}{R \ \overline{\omega}} (\gamma sin \phi - \omega_d cos \phi) \]
+\end{tcolorbox}
+
+
+The displaceement corresponding to the static application of the external load \( F_d\) is called statuc displacement.
+\[ x_{st} = \frac{F_d}{k}\]
+Dynamic amplication factor or magnification factor is ratio of amplitude of motion to the static displacement.
+
+Dynamic response factor - 
+\begin{tcolorbox}[colback=yellow!40!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+\[ R_d = \frac{ F/R}{F_d/k} = \frac{\omega^2}{R} \]
+\end{tcolorbox}
+
+\noindent
+Let us define frequency ratio - ratio between forcing freuency and natural frequency - 
+\[ \beta = \frac{\omega_d}{\omega} \]
+
+\section{Physical interpretation }
+Let us look at the steady state solution.
+The amplitude of steady state solution is proportional to 1/R.\\
+
+
+\noindent
+Given \( \omega_d\) and \(\gamma\) the amplitude is maximum when \( \omega = \omega_d\).\\
+
+\noindent
+Given \( \omega\) and \(\gamma\) the amplitude is maximum when \( \omega_d = \sqrt{\omega^2  - 2 \gamma^2 }\).
+In the case of weak damping ( \(\gamma << 0\)) the maximum is achieved when \(\omega = \omega_d\). \\
+
+Let us see how \(R_d\) and \(\phi\) differ as a function of \(\beta\) and different values of \(\gamma\)\\
+
+\noindent
+\( 1.\ \ \beta \rightarrow 0 \ \ \ \omega_d \rightarrow 0 \ \ \ R \rightarrow \omega^2 \ \ \ R_d \rightarrow 1 \) irrespective of \(\gamma \)\\
+
+\noindent
+\( 2. \ \ \beta \rightarrow \infty \ \ \  \omega \rightarrow 0 \ \ \ R_d \rightarrow 0\) irrespective of \(\gamma \)\\
+
+\noindent
+\( 3. \ \ \beta \rightarrow 1 \ \ \  \omega \rightarrow \omega_d \ \  R \rightarrow 2 \gamma \omega_d \) and \(R_d\) is finite for \(\gamma > 0\)\\
+
+\noindent
+\(4. \ \  \beta \rightarrow 1 \ \ \ R \rightarrow 0 \ \ \ R_d \rightarrow \infty \) for \(\gamma \rightarrow 0\) \\
+
+\noindent
+Now we seperate into 3 regions when excitation frequency is less than natural 
+frequency and excitation frequency is equal to the natural frequency and excitation frequency is 
+greater than natural frequency, the following physical interpretation can be made with the help of 
+the force equilibrium with respect to phase angle.\\
+
+\( 1.\ \ \beta << 1 \ \ \ \omega >> \omega_d \ \ , \phi \) is small \\ - 
+
+The external load and motion is in phase. The response in this frequency range is controlled 
+by the stiffness of the system. The effect of inertia force and damping force will be 
+small.\\
+
+\( 2.\ \ \beta = 1 \ \ \ \omega = \omega_d \ \ , \phi = \pi/2 \) \\ - 
+
+The external load is in phase with velocity and so the response will be dominated by the damping force. For higher damping value the amplitude will be small.
+
+\( 3.\ \ \beta >> 1 \ \ \ \omega << \omega_d \ \ , \phi \) is close to \(\pi\) \\ - 
+
+The external load and motion will be out of phase.  The load is in phase with accelaration and so the response will be controlled by the mass of the system.
+
+\chapter{Two Degree of Freedom System}
+\chapter{Multidegree of Freedom System}
+\chapter{Determination of natural frequencies and mode shapes}
+\chapter{Continuos systems}
+\chapter{Numerical Integration methods in vibration analysis}
+
+\part{Motion in waves}
+\chapter{Ship response to regular waves}
+\end{document}

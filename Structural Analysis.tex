@@ -1,0 +1,202 @@
+\documentclass{report}
+\usepackage{amsmath} % For advanced mathematical typesetting
+\usepackage{graphicx} % For including graphics
+\usepackage{amssymb} % For mathematical symbols
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{float}
+\usepackage{array}
+\begin{document}
+\tableofcontents
+\chapter{Stress Strain}
+\section{Stress}
+\section{Strain}
+\chapter{Stress strain transformation}
+\chapter{Axial load}
+\chapter{Torsion}
+\chapter{Bending}
+\chapter{Deflection of beams and shafts}
+The deflection of beam or shaft must often be limited in order to provide integrity and
+stability of a structure
+\section{Moment-curvature Relationship}
+We will now develop an important relationship between the internal moment and the radius of curvature \(\rho\) of the 
+elastic curve. Due to loading the deformation of the beam is caused by both internal shear force and bending moment. If the 
+beam has length that is much greater than its depth the greatest deformation will be caused by bending and therefore we will
+direct our attention towards its effects. We will look at deflections caused by shear later.
+
+
+When the internal moment M deforms the element of the beam, the angle between the cross sections becomes \(d\theta\) 
+The arc dx represents portion of the elastic curve that intersects the neutral axis. Any arc on the element other than dx is subjected to normal strain.
+Let us see strain in ds located at position y from neutral axis.
+
+\[ dx=ds= \rho d\theta \]
+\[ ds = (\rho - y) d\theta\]
+\[ \epsilon = \frac{(\rho - y)d\theta - \rho d\theta}{\rho d\theta} \]
+\[ \epsilon = \frac{-y}{\rho} \]
+From flexture formula - 
+\[ \sigma =  \frac{-My}{I} \]
+From Hookes law - 
+\[ \epsilon = \frac{\sigma}{E}\] 
+
+Hence - 
+\begin{tcolorbox}[colback=pink!30!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+    \[\frac{1}{\rho} = \frac{M}{EI}\] 
+\end{tcolorbox}
+
+The equation of elastic curve of beam can be represented mathematically as v = f(x). To obtain this equation we must first represent the
+curvature \((1/\rho )\) in terms of v and x. From calculus we have the relationship - 
+
+\[ \frac{1}{\rho} = \frac{ d^2v/dx^2}{[1+ (dv/dx)^2]^{3/2}} \] 
+The slope of the elastic curve determined from dv/dx will be very small. Hence we approximate - 
+
+\[ \frac{d^2v}{dx^2} = \frac{M}{EI} \]
+
+It is also possible to write this equation in alternative forms. We substitue V = dM/dx to get - 
+
+\[ EI \frac{d^3v}{dx^3} = V(x)\] 
+Differentiating again using w = dV/dx - 
+\[ EI \frac{d^4v}{dx^4} = w(x) \]
+
+Solution of any of these equations requires sucessive integration to
+obtain the deflection v of the elastic curve. For each integration it is 
+necessary to introduce a constant of integration and then solve for all 
+constants to obtain a unique solution for a particular problem.
+
+\subsection{Sign convention and coordinates}
+
+
+\section{Boundary and continuity conditions}
+
+The constants 
+\section{Simple Integration method}
+
+\textbf{Simply supported beam with load P acting at center -}\\
+
+\noindent
+For \(0 < x <l/2\)
+
+\[V(x) = P/2\]
+\[M(x) = Px/2\]
+\[ EI \frac{d^2v}{dx^2} = \frac{Px}{2} \] 
+\[ EI \frac{dv}{dx} = \frac{Px^2}{4} + c_1 \] 
+\[ EI v_1(x) = \frac{Px^3}{12} + c_1 x + c_2 \] 
+
+Applying boundary condition \(v_1(x = 0) = 0 \). We get \(c_2 =0\).
+
+\[ v_1(x) = \frac{1}{EI} \left( \frac{Px^3}{12} + c_1 x \right) \]
+
+For \(0 < x <l/2\)
+
+\[V(x) = -P/2 \] 
+\[ M(x) = Pl/2 + V(x).x \] 
+\[ M(x) = \frac{P}{2}(l-x) \]
+\[ EI \frac{d^2v}{dx^2} = \frac{P}{2}(l-x)\]
+\[ EI \frac{dv}{dx} = \frac{P}{2}\left(lx-\frac{x^2}{2}\right) + c_3\]
+\[ EI v_2(x) = \frac{P}{2}\left(\frac{lx^2}{2}-\frac{x^3}{6}\right) + c_3 x + c_4\]
+
+Applying the other three boundary conditions to get \(c_1\) \(c_3\) and \( c_4\)\\
+
+1. \(v_1(x) = v_2(x)\) at \( x =l/2 \)
+\[ \left( \frac{Pl^3}{96} + \frac{c_1l}{2}  \right) = \frac{P}{2}\left( \frac{l^3}{8} - \frac{l^3}{48}\right) + \frac{c_3l}{2} + c_4 \]
+\[ \frac{Pl^3}{24} = \frac{c_1l}{2} - \frac{c_3l}{2} - c_4 \] 
+
+
+2. \(v_2(x) =0\) at \(x=l \)
+\[ \frac{P}{2}\left( \frac{l^3}{2} - \frac{l^3}{6}\right) + c_3 l + c_4= 0\]
+\[ \frac{Pl^3}{6} + c_3 l + c_4= 0\]
+\[ c_4 = -c_3l - \frac{Pl^3}{6} \]
+
+3. \(\theta_1(x) = \theta_2(x)\) at \(x=l/2 \)
+\[ \frac{Pl^2}{16} + c_1 = \frac{P}{2}\left( \frac{l^2}{2}- \frac{l^2}{8} \right) + c_3 \]
+\[ c_1 = \frac{Pl^2}{8} + c_3 \]
+
+From 3 and 2 substitute \(c_1\) and \(c_4\) in 1 to get \(c_3\)
+
+\[ \frac{Pl^3}{24} = \frac{Pl^3}{16} + \frac{c_3l}{2} - \frac{c_3l}{2}+ c_3l + \frac{Pl^3}{6} \]
+
+\begin{tcolorbox}[colback=pink!30!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+  \[ c_3 = -\frac{3Pl^2}{16} \ \ and \ \ c_1 = -\frac{Pl^2}{16} \ \ and \ \  c_4 = \frac{Pl^3}{48}\]
+\end{tcolorbox}
+
+The deflection of beam ar x= l/2 comes - 
+\begin{tcolorbox}[colback=blue!20!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+  \[ v = -\frac{Pl^3}{48 EI} \]
+\end{tcolorbox}
+
+\noindent
+\textbf{Cantilevered beam with load P acting at distance x -}\\
+\section{Macaulays method}
+
+\section{Moment area method}
+\section{Castiglianos Theorem}
+\section{Method of superposition}
+\section{Statistically indeterminate beams}
+\section{Matrix method of analysis}
+For analysis by the matrix stiffness method the continuous beam is modeled as a series
+of straight prismatic members connected  at their ends to joints, so that external reactions
+act only at the joints. It is important to realize that because the joints are modeled
+as rigid joints they satisfy the continuity and restraint conditions of the actual structure
+
+Degrees of Freedom
+The degrees of freedom of a beam are simply its unknown joint displacements (translations and rotations)
+. Since axial deformations in a beam are neglected, a joint can have two degrees of freedom
+namely translation in y direction and rotation about z-axis. Thus the number of structure
+coordiantes at a joint of a beam equals 2.
+
+We calculate the total degree of freedom of a beam by summing the DOF of all n joints
+in the beam. The number of degrees of freedom of a beam are represented by NDOF,
+The NDOF \(\times\) joint displacement vector d can be written as
+
+\[
+  d_{NDOF\times1} =
+  \left[ {\begin{array}{c}
+    d_1 \\
+    d_2 \\
+    \vdots \\
+    d_n \\
+  \end{array} } \right]
+\]
+
+We can also obtain NDOF by 
+\[NDOF = 2(NJ) - NR\]
+where NJ is number of joints of the beam and NR denotes the number of joint 
+displacements restrained by supports (or number of restrained co-ordinates).
+
+While analysing beam it is not necessary to draw its deformed shap. Instead we draw
+a line diagram specifying all the structure coordinates (DOF and restrained coordinates)
+by assigning numbers to the arrows drawn at the joints in the directions of joint displacements
+The DOF are numbered first starting at the lowest numbered joint and proceeding sequentially
+to the highest numbered joint. If a joint has two DOF then the translation in Y direction
+is numbered first followed by rotation. After all DOF of beam are numbered we number the 
+restrained coordinates beginning with a number equal to NDOF + 1. Starting at the lowest 
+numbered joint and proceeding sequentially to the highest number of joint, all the 
+restrained coordinates of the beam are numbered. The y coordinate corresponding
+to the reaction force is numbered first followedby the rotation coordinate 
+corresponding to reaction couple . The number assigned to the last restrained coordinate
+of the beam is always 2(NJ).
+
+The external loads on beams may be applied at joints as well as on the members. The 
+external loads applied at joints at the joints are referred to joint loads whereas
+external loads acting between the ends of the members are termed member loads. In this
+section we focus our attention only on joint loads.
+
+A beam with n DOF can be subjected to maximum n joint loads.We can write the joint 
+load vector P as 
+
+\[
+  d_{NDOF\times1} =
+  \left[ {\begin{array}{c}
+    P_1 \\
+    P_2 \\
+    \vdots \\
+    P_n \\
+  \end{array} } \right]
+\]
+
+
+
+
+\chapter{Bucking of columns}
+\section{Columns Having Various Types of Supports}
+Effective length - 
+\end{document}

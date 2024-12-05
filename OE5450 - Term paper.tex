@@ -1,0 +1,592 @@
+\documentclass{article}
+\usepackage{amsmath} % For advanced mathematical typesetting
+\usepackage{graphicx} % For including graphics
+\usepackage{amssymb} % For mathematical symbols
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{float}
+\usepackage{array}
+\usepackage{verbatim}
+\usepackage{longtable}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{fvextra} % Provides extended Verbatim features
+\usepackage[a4paper, margin=1in]{geometry}
+
+
+% Define a custom Verbatim environment with colored text
+\DefineVerbatimEnvironment{ColoredVerbatim}{Verbatim}
+{formatcom=\color{red}, breaklines=true} % Replace 'red' with the desired color
+
+
+
+\title{\textbf{\Large{Numerical Modeling of Unsteady Open Channel Flows}}}
+\author{\textit{Aatmaj Bhayani - NA22B018}} % Replace "Your Name" with your name
+\date{\today} % You can replace \today with a specific date, e.g., "November 2024"
+
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{2cm} % Adjust vertical space to position the title
+    {\Huge \textbf{Numerical Modeling of Unsteady Open Channel Flows} \par}
+    \vspace{1cm}
+    {\Large \textit{by} \par}
+    \vspace{0.5cm}
+    {\Large Aatmaj Bhayani - NA22B018 \par}
+    \vfill
+    {\large Term Paper OE5450 \par}
+    \vspace{1cm}
+    {\large 26 November 2024 \par}
+\end{titlepage}
+
+\section{Introduction}
+
+Unsteady open channel flows represent non-uniform, time-dependent flow patterns commonly found in natural and 
+engineered water systems. Analyzing these flows is critical for designing efficient hydraulic systems and 
+managing water resources. \\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width= 0.8\textwidth]{images/open.png}
+    \caption{Open channel flow}
+    \label{fig:sample}
+\end{figure}
+
+Open channel flow are conduits  in which the liquid flows with a free surface exposed to atmospheric pressure. 
+Examples include rivers, canals, and drainage systems. \\
+
+Understanding the behavior 
+of flows in these channels is critical for applications in civil and environmental engineering, such as flood 
+forecasting, sediment transport, and irrigation system design.\\
+
+Numerical modeling of unsteady flow provides engineers with tools to simulate complex systems efficiently. Analytical 
+solutions to the governing equations are often impossible due to non-linearities and boundary conditions. 
+Numerical methods overcome these challenges, allowing accurate simulation of real-world scenario.\\
+
+\noindent
+In this paper we focus on:\\
+
+\noindent
+\textbf{1. Deriving and understanding the governing equations for unsteady open channel flow.}\\
+
+\noindent
+\textbf{2. Applying numerical techniques for discretizing and solving these equations.}\\
+
+\noindent
+\textbf{3. Implementing a Python-based solution to simulate the flow.}\\
+
+\noindent
+\textbf{4. Analyzing results and discussing}\\
+
+\section{Governing Equations}
+The unsteady state one-dimensional quasi-horizontal flows can be described in the terms of average 
+velocity u(x,t) , or the flow discharge Q(x,t) and the water depth y(x,t). The two governing equations of the 
+phenomenon are based on the principles of -\\
+
+
+\noindent
+\textbf{Mass conservation -}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width= 0.8\textwidth]{images/mass.png}
+    \caption{Open channel flow}
+    \label{fig:sample}
+\end{figure}
+
+
+\[ \frac{\partial A }{\partial t} + \frac{\partial Q}{\partial x} = q_L\]
+
+For rectangular channel the equation can be written as - 
+
+\[ \frac{\partial y}{\partial t} + \frac{1}{B} \frac{\partial Q}{\partial x} =  \frac{q_L}{B} \]
+where \(q_L\) is the lateral inflow 
+
+This equation expresses the evolution of free surface elevation in terms of the difference between the incoming 
+and outgoing discharges through the infinitesimal control volume.\\
+
+\noindent
+\textbf{Momentum balance equation - }\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width= 0.8\textwidth]{images/momentum.png}
+    \caption{Open channel flow}
+    \label{fig:sample}
+\end{figure}
+
+The following are taken into consideration -\\
+
+The hydrstatic pressure forces acting on the two sides.
+The component of the weight of water \(W_x\) within the control volume along the flow direction that is
+parallel to bed.
+The sum of the distributed frictional forces \(\tau_o\) over the wetted perimeter of the channel.\\
+
+The equation takes the form -
+
+\[ \frac{\partial u}{\partial t} + u \frac{\partial u}{\partial t} = -g \frac{\partial y}{\partial x} + g(S_o - S_e) \] 
+
+where \(S_o\) is the slope of the channel bed and \( S_e = \frac{\tau_o}{g\rho R_h}\) is the slope of the
+energy grade line. 
+By using the chezy formula for wall friction - 
+
+\[ S_e = \frac{u^2}{(C_z)^2 R_h} \] 
+
+For rectangular channels , A = By and if the channel is much larger than depth ( as in river cross section geometry).
+\(R_h = y\)\\
+
+For \(q_L =0 \) and neglecting the non linear terms the governing equations are written as - 
+
+\begin{tcolorbox}[colback=blue!20!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+\[ \frac{\partial y}{\partial t} + \frac{1}{B} \frac{\partial Q}{\partial x} = 0 \] 
+
+\[ \frac{\partial u }{\partial t}  = -g \frac{\partial y}{\partial x}  + g (S_o - S_e) \] 
+\end{tcolorbox}
+
+\noindent
+These are the two linear hyperbolic equations of the first order.\\
+
+The discharge relation for rectangular channel of variable width - 
+
+\[ Q = uBy = uA \] 
+
+\section{Auxillary conditions}
+
+\textbf{The initial conditions} - the values of u(x, t =0) and y(x,t = 0) should be provided foir the entire
+solution domain. In case of an initially 'dry bed', the initial conditions are u(x, t =0) = 0 and y(x,t = 0) = 0.\\
+
+\noindent
+For the upstream end the incoming fllod discharge hydrograph Q(x = 0, t) is provided. It represents Q values
+with an observation time interval \( \delta t\).\\
+
+\noindent
+\textbf{For the downstream end boundary - }\\
+
+\noindent
+1. A constant water depth can be maintained - y(x=L, t) = Y = constant\\
+2. The flow can be led to a critical flow regime like free outflow and has the form of a critical 
+relation between flow depth and outflow.
+
+\section{Numerical solution approach}
+
+The numerical solution of the system of the governing equations is done by the means of a staggered grid
+We write an explicit finite difference scheme\\
+
+\noindent
+Forward difference for time derivatives - \\
+\noindent
+Central difference for space derivatives -
+
+\begin{tcolorbox}[colback=pink!80!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+\begin{align*}
+    \frac{y_i^{n+1} - y_i^n}{\Delta t} &= -\frac{2}{B_i + B_{i+1}} \frac{Q_{i+1}^n - Q_i^n}{\Delta x}, \\
+    \frac{u_i^{n+1} - u_i^n}{\Delta t} &= -g \frac{y_i^{n+1} - y_{i-1}^{n+1}}{\Delta x} 
+    + g \left( S_o - \frac{2 |u_i^n| u_i^n}{C_z^2 \left( y_i^{n+1} + y_{i-1}^{n+1} \right)} \right), \\
+    Q_i^{n+1} &= u_i^{n+1} B_i \frac{y_i^{n+1} + y_{i-1}^{n+1}}{2}.
+\end{align*}
+\end{tcolorbox}
+
+To maintain numerical stability the \textbf{CFL criterion} must be satisfied at all times.\\
+
+\noindent
+Free flow relationship for downstream is given by -  \( Q_out = CBy^(1.5) \)
+
+\section{Solution to a problem }
+
+Input data required to solve the problem of unsteady flow in rectangular open channel of constant width\\
+
+\noindent
+h = Flow depth m\\
+b = Channel width (m)\\
+S = Bed slope\\
+C = Chezy coefficient of friction \\
+Qin = Inflow hydrograph (\( m^3/s\))\\
+Dx = Spatial step (m)\\
+Dt = Time step (s)\\
+nx = Number of spatial steps\\
+nt = Number of time steps\\
+dt = Time step of the inflow hydrograph (s)\\
+nth = Number of time steps of the inflow hydrograph\\
+
+\noindent
+\begin{tcolorbox}[colback=yellow!30!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+\textbf{Problem 1}
+\noindent 
+- The problem is of routing of a flood wave over a constant width rectangular channel with an initial dry bed, \(y(x, t = 0) = 0\).
+The data used for the simulation are the following:\\
+\end{tcolorbox}
+
+\noindent
+ Channel width = 100 m\\
+ Channel length = 41,000 m\\
+ Bed slope = 0.001\\
+ Chezys coefficient of friction = 50\\
+
+The data for the inflow hydrograph upstream boundary condition is given.
+
+\begin{longtable}{|c|c|}
+    \hline
+    \textbf{Time (seconds)} & \textbf{Discharge (m\(^3\)/s)} \\
+    \hline
+    \endfirsthead
+    
+    \hline
+    0 & 0 \\
+    2000 & 0 \\
+    4000 & 600 \\
+    6000 & 400 \\
+    8000 & 200 \\
+    10000 & 100 \\
+    12000 & 50 \\
+    14000 & 0 \\
+    \hline
+    
+\end{longtable}
+
+The downstream boundary condition was defined 
+by a flow over weir relationship. The spatial and temporal discretization 
+Steps were selected as \(\Delta x = 1000 m\) and \(\Delta t = 5 s\). Since the inflow hydrograph discretization step \(\partial t = 2000 s\) is different from that of the com
+putational time step \(\Delta t = 5 s\) an interpolation is required.\\
+
+\noindent
+\textbf{Python code:}
+
+\noindent
+\textbf{Step1: Interpolation of inflow discharge}\\
+
+\noindent
+\textbf{Step2: Update velocity and discharge}\\
+
+\noindent
+\textbf{Step3: Downstream Boundary condition}\\
+
+\noindent
+\textbf{Step4: Update water depth}\\
+
+\noindent
+\textbf{Step5: Store data for plotting}\\
+
+\noindent
+\textbf{Step6: Plotting the results}\\
+
+\begin{ColoredVerbatim}[formatcom=\color{red}]
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+    
+    # Input data
+    g = 9.81
+    Dx = 1000
+    Dt = 5
+    nx = 41
+    nt = 9000
+    dt = 2000
+    nth = 15
+    
+    # Initialize arrays
+    h = np.zeros(nx)
+    S = np.full(nx, 0.001)
+    b = np.full(nx, 100)
+    C = np.full(nx, 50)
+    Qin = [0, 600, 400, 200, 100, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    u = np.zeros(nx)
+    Q = np.zeros(nx)
+    
+    # Initialize variables for storing data at specific times
+    h1t = h2t = h3t = h4t = h5t = h6t = np.zeros(nx)
+    Q1t = Q2t = Q3t = Q4t = Q5t = Q6t = np.zeros(nx)
+    
+    # Main program
+    for k in range(1, nt + 1):
+        # Calculation of inflow discharge by interpolation
+        jj = k * Dt / dt
+        jr = int(np.round(jj)) + 1
+        if jr >= nth:
+            jr = nth - 1
+        if jr < len(Qin) - 1:  # Only interpolate if jr+1 is within bounds
+            Q[0] = Qin[jr] + (Qin[jr + 1] - Qin[jr]) * (k * Dt - (jr - 1) * dt) / dt
+        else:
+            Q[0] = Qin[jr]  # No interpolation if we are at the last index
+        # Calculation of the velocity and discharge
+        for i in range(1, nx - 1):
+            if h[i - 1] < 0.001:
+                u[i] = 0
+            else:
+                u[i] += Dt * g * (S[i] - (h[i] - h[i - 1]) / Dx - u[i] * abs(u[i]) / C[i]**2 * 2 / (h[i] + h[i - 1]))
+                Q[i] = u[i] * b[i] * (h[i] + h[i - 1]) / 2
+    
+        # Downstream boundary condition
+        Q[nx - 1] = b[nx - 1] * h[nx - 2] * np.sqrt(g * h[nx - 2])
+    
+        # Estimation of the water depths
+        for i in range(nx - 1):
+            h[i] -= Dt / Dx / (b[i] + b[i + 1]) * 2 * (Q[i + 1] - Q[i])
+    
+        # Store data at specific time intervals for plotting
+        if k == round(nt / 9):
+            h1t, Q1t = h.copy(), Q.copy()
+        if k == round(nt / 6):
+            h2t, Q2t = h.copy(), Q.copy()
+        if k == round(nt / 4.5):
+            h3t, Q3t = h.copy(), Q.copy()
+        if k == round(nt / 3):
+            h4t, Q4t = h.copy(), Q.copy()
+        if k == round(nt / 2):
+            h5t, Q5t = h.copy(), Q.copy()
+        if k == nt:
+            h6t, Q6t = h.copy(), Q.copy()
+    
+    # Plotting inflow hydrograph
+    plt.figure()
+    plt.plot(range(1, nth + 1), Qin, 'k', linewidth=1.5)
+    plt.xlabel('Number of time steps × 2000 [s]')
+    plt.ylabel('Inflow hydrograph [m³/s]')
+    plt.axis([0, 15, 0, 660])
+    plt.show()
+    
+    # Plotting water discharge
+    plt.figure()
+    plt.plot(range(1, nx + 1), Q1t, 'b', linewidth=1.5, label='t=1000×Dt')
+    plt.plot(range(1, nx + 1), Q2t, 'r', linewidth=1.5, label='t=1500×Dt')
+    plt.plot(range(1, nx + 1), Q3t, 'g', linewidth=1.5, label='t=2000×Dt')
+    plt.plot(range(1, nx + 1), Q4t, 'b--', linewidth=1.5, label='t=3000×Dt')
+    plt.plot(range(1, nx + 1), Q5t, 'r--', linewidth=1.5, label='t=4500×Dt')
+    plt.plot(range(1, nx + 1), Q6t, 'g--', linewidth=1.5, label='t=9000×Dt')
+    plt.xlabel('Longitudinal distance × 1000 [m]')
+    plt.ylabel('Water discharge [m³/s]')
+    plt.axis([0, 42, 0, 550])
+    plt.legend()
+    plt.show()
+    
+    # Plotting water depth
+    plt.figure()
+    plt.plot(range(1, nx + 1), h1t, 'b', linewidth=1.5, label='t=1000×Dt')
+    plt.plot(range(1, nx + 1), h2t, 'r', linewidth=1.5, label='t=1500×Dt')
+    plt.plot(range(1, nx + 1), h3t, 'g', linewidth=1.5, label='t=2000×Dt')
+    plt.plot(range(1, nx + 1), h4t, 'b--', linewidth=1.5, label='t=3000×Dt')
+    plt.plot(range(1, nx + 1), h5t, 'r--', linewidth=1.5, label='t=4500×Dt')
+    plt.plot(range(1, nx + 1), h6t, 'g--', linewidth=1.5, label='t=9000×Dt')
+    plt.xlabel('Longitudinal distance × 1000 [m]')
+    plt.ylabel('Water depth [m]')
+    plt.axis([0, 42, 0, 2.6])
+    plt.legend()
+    plt.show()
+    
+\end{ColoredVerbatim}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width= 0.8\textwidth]{images/11.png}
+    \caption{Inflow Hydrograph}
+    \label{fig:sample}
+\end{figure}    
+    
+\begin{figure}[H]
+    \centering
+    \includegraphics[width= 0.8\textwidth]{images/12.png}
+    \caption{Flow rates over the channel at different times}
+    \label{fig:sample}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width= 0.8\textwidth]{images/13.png}
+    \caption{Water depths over the channel at different times}
+    \label{fig:sample}
+\end{figure}
+
+\begin{tcolorbox}[colback=yellow!40!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+\textbf{Problem 2} 
+-  Change the roughness coefficient linearly from Cz = 105 \(\sqrt{m}/s\) at the 
+upstream boundary to Cz = 30 \(\sqrt{m}/s\) at the downstream boundary. 
+\end{tcolorbox}
+
+
+\noindent
+In this script we need to incorporate a changing roughness coefficient, transitioning linearly from \(C_z = 105\) upstream to 30 downstream over the entire solution.\\
+
+\noindent
+\textbf{Pythoncode}
+
+\begin{ColoredVerbatim}[formatcom=\color{red}]
+    import numpy as np
+    import matplotlib.pyplot as plt
+    
+    # Input data
+    g = 9.81
+    Dx = 1000
+    Dt = 5
+    nx = 41
+    nt = 9000
+    dt = 2000
+    nth = 15
+    
+    # Initialize arrays
+    h = np.zeros(nx)
+    S = np.full(nx, 0.001)
+    b = np.full(nx, 100)
+    C = np.full(nx, 105)  # Initial value of C is 105
+    Qin = [0, 600, 400, 200, 100, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    u = np.zeros(nx)
+    Q = np.zeros(nx)
+    
+    # Initialize variables for storing data at specific times
+    h1t = h2t = h3t = h4t = h5t = h6t = np.zeros(nx)
+    Q1t = Q2t = Q3t = Q4t = Q5t = Q6t = np.zeros(nx)
+    
+    # Main program
+    for k in range(1, nt + 1):
+        # Update C linearly from 105 to 30
+        C[:] = 105 - (105 - 30) * k / nt  # Update C for all positions
+        
+        # Calculation of inflow discharge by interpolation
+        jj = k * Dt / dt
+        jr = int(np.round(jj)) + 1
+        if jr >= nth:
+            jr = nth - 1
+        if jr < len(Qin) - 1:  # Only interpolate if jr+1 is within bounds
+            Q[0] = Qin[jr] + (Qin[jr + 1] - Qin[jr]) * (k * Dt - (jr - 1) * dt) / dt
+        else:
+            Q[0] = Qin[jr]  # No interpolation if we are at the last index
+        
+        # Calculation of the velocity and discharge
+        for i in range(1, nx - 1):
+            if h[i - 1] < 0.001:
+                u[i] = 0
+            else:
+                u[i] += Dt * g * (S[i] - (h[i] - h[i - 1]) / Dx - u[i] * abs(u[i]) / C[i]**2 * 2 / (h[i] + h[i - 1]))
+                Q[i] = u[i] * b[i] * (h[i] + h[i - 1]) / 2
+    
+        # Downstream boundary condition
+        Q[nx - 1] = b[nx - 1] * h[nx - 2] * np.sqrt(g * h[nx - 2])
+    
+        # Estimation of the water depths
+        for i in range(nx - 1):
+            h[i] -= Dt / Dx / (b[i] + b[i + 1]) * 2 * (Q[i + 1] - Q[i])
+    
+        # Store data at specific time intervals for plotting
+        if k == round(nt / 9):
+            h1t, Q1t = h.copy(), Q.copy()
+        if k == round(nt / 6):
+            h2t, Q2t = h.copy(), Q.copy()
+        if k == round(nt / 4.5):
+            h3t, Q3t = h.copy(), Q.copy()
+        if k == round(nt / 3):
+            h4t, Q4t = h.copy(), Q.copy()
+        if k == round(nt / 2):
+            h5t, Q5t = h.copy(), Q.copy()
+        if k == nt:
+            h6t, Q6t = h.copy(), Q.copy()
+    
+    # Plotting inflow hydrograph
+    plt.figure()
+    plt.plot(range(1, nth + 1), Qin, 'k', linewidth=1.5)
+    plt.xlabel('Number of time steps × 2000 [s]')
+    plt.ylabel('Inflow hydrograph [m³/s]')
+    plt.axis([0, 15, 0, 660])
+    plt.show()
+    
+    # Plotting water discharge
+    plt.figure()
+    plt.plot(range(1, nx + 1), Q1t, 'b', linewidth=1.5, label='t=1000×Dt')
+    plt.plot(range(1, nx + 1), Q2t, 'r', linewidth=1.5, label='t=1500×Dt')
+    plt.plot(range(1, nx + 1), Q3t, 'g', linewidth=1.5, label='t=2000×Dt')
+    plt.plot(range(1, nx + 1), Q4t, 'b--', linewidth=1.5, label='t=3000×Dt')
+    plt.plot(range(1, nx + 1), Q5t, 'r--', linewidth=1.5, label='t=4500×Dt')
+    plt.plot(range(1, nx + 1), Q6t, 'g--', linewidth=1.5, label='t=9000×Dt')
+    plt.xlabel('Longitudinal distance × 1000 [m]')
+    plt.ylabel('Water discharge [m³/s]')
+    plt.axis([0, 42, 0, 550])
+    plt.legend()
+    plt.show()
+    
+    # Plotting water depth
+    plt.figure()
+    plt.plot(range(1, nx + 1), h1t, 'b', linewidth=1.5, label='t=1000×Dt')
+    plt.plot(range(1, nx + 1), h2t, 'r', linewidth=1.5, label='t=1500×Dt')
+    plt.plot(range(1, nx + 1), h3t, 'g', linewidth=1.5, label='t=2000×Dt')
+    plt.plot(range(1, nx + 1), h4t, 'b--', linewidth=1.5, label='t=3000×Dt')
+    plt.plot(range(1, nx + 1), h5t, 'r--', linewidth=1.5, label='t=4500×Dt')
+    plt.plot(range(1, nx + 1), h6t, 'g--', linewidth=1.5, label='t=9000×Dt')
+    plt.xlabel('Longitudinal distance × 1000 [m]')
+    plt.ylabel('Water depth [m]')
+    plt.axis([0, 42, 0, 2.6])
+    plt.legend()
+    plt.show()
+
+\end{ColoredVerbatim}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width= 0.8\textwidth]{images/21.png}
+    \caption{Inflow Hydrograph}
+    \label{fig:sample}
+\end{figure}    
+    
+\begin{figure}[H]
+    \centering
+    \includegraphics[width= 0.8\textwidth]{images/22.png}
+    \caption{Flow rates over the channel at different times}
+    \label{fig:sample}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width= 0.8\textwidth]{images/23.png}
+    \caption{Water depths over the channel at different times}
+    \label{fig:sample}
+\end{figure}
+
+\section{Results and conclusion}
+
+\begin{itemize}
+    \item The study successfully demonstrates the application of numerical methods to solve the Saint-Venant equations for unsteady open channel flows, providing insights into flood routing and channel hydraulics.
+    \item The explicit finite difference scheme with staggered grids proved efficient and accurate for simulating transient flows under varying conditions.
+    \item Boundary conditions, such as the upstream inflow hydrograph and downstream weir relationships, play critical roles in shaping flow dynamics.
+    \item Changes in roughness coefficients significantly impact the energy dissipation and flow profiles, reinforcing the need to account for spatially varying friction in hydraulic modeling.
+    \item The presented Python implementation serves as a versatile and reproducible tool for solving real-world hydraulic problems, offering potential for further refinement and application in complex systems.
+\end{itemize}
+
+\section{Analytical vs numerical solution}
+
+When solving unsteady open channel flow problems numerically, the solution deviates from the actual physical flow due to inherent limitations and approximations in the numerical approach.
+This is due to the following reasons - \\
+
+\noindent
+\textbf{Discretization Error:}\\
+Spatial (grid size) and temporal (time step) resolution affect accuracy.
+Larger grid sizes or time steps result in smoothed approximations of wavefronts.\\
+
+\noindent
+\textbf{Numerical Diffusion:}\\
+Artificial smoothing of steep gradients (e.g., wavefronts), causing wave energy to spread out unrealistically.
+Leads to a more gradual wave propagation than in reality.\\
+
+\noindent
+\textbf{Truncation Error:}\\
+Results from approximating derivatives in the governing equations using finite differences.
+Higher-order schemes reduce this error but require more computational effort.\\
+
+\noindent
+\textbf{Boundary Condition Approximations:}\\
+Simplified representations of upstream inflow and downstream outflow may not fully capture dynamic boundary effects.\\
+
+\noindent
+\textbf{Friction and Roughness Modeling:}\\
+Numerical friction models (e.g., Chezy or Manning's coefficient) assume constant values, which may not reflect real, variable roughness.\\
+
+\noindent
+The differences we will see in the numerical unsteady open channel flow solution are - \\
+
+1. The analytical solution will have sharper wavefronts which will be well defined and steep. While in the numerical solution wavefronts
+will be smoothned due to numerical diffusion.\\
+
+2. Energy loss representation - In analytical solution it varies with time and location while we have modeled them as uniform friction losses.\\
+
+3. Flow transitions - The flow transitions will be sudden(hydraulic jumps) while our numerical solution will show them gradual due to smoothing.\\
+
+4. Turbulenfce effects are neglected or over simplified.
+
+\end{document}

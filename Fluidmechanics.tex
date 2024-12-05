@@ -1,0 +1,677 @@
+\documentclass{report}
+\usepackage{amsmath} % For advanced mathematical typesetting
+\usepackage{graphicx} % For including graphics
+\usepackage{amssymb} % For mathematical symbols
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{float}
+\usepackage{array}
+
+\begin{document} 
+\tableofcontents
+\part{Fluid Mechanics}
+\chapter{Integral relations for control volume}
+\section{Volume and mass rate flow}
+
+\section{Reynolds transport theorem}
+To convert a system analysis to a control volume analysis, we must convert our mathematics to apply to a specific region rather than to individual masses. This conversion, called the Reynolds transport theorem, can be applied to all the basic laws.
+
+There is variable inflow and outflow of fluid about the control volume. Each \( dA \) will have different flow properties. The figure shows a fixed control volume with arbitrary flow pattern.
+Let \( B \) be any property of the fluid (energy, momentum, enthalpy, etc.). Let \( \beta = \frac{dB}{dm} \) be the intensive value.
+The total amount of \( B \) in the control volume is:
+\[ B_V = \int_V \beta \, dV \]
+
+Change within control volume:
+\[ \frac{dB_V}{dt} = \frac{d}{dt} \int_V \beta\rho \,dV \]
+
+Outflow of \( \beta \) from control volume:
+\[ \int_S \beta\rho v \cos\theta \,dA_o \]
+
+Inflow of \( \beta \) to control volume:
+\[ \int_S \beta\rho v \cos\theta \,dA_i \]
+
+\[ \frac{d}{dt} B_{sys} = \frac{d}{dt} \int_V \beta\rho \,dV + \int_S \beta\rho v \cos\theta \,dA_o - \int_S \beta\rho v \cos\theta \,dA_i \]
+
+\[ \frac{d}{dt} B_{sys} = \frac{d}{dt} \int_V \beta\rho \,dV + \int_S \beta\rho (\overline{v}.\hat{n}) \,dA \]
+
+This is the Reynolds Transport Theorem for arbitrary fixed control volume.
+
+If the control volume is moving at velocity \( V_s \), an observer fixed to control volume will see a relative velocity \( V_r \) of fluid across the control surface.
+
+\section{Conservation of mass}
+For \( B=m \) and \( \beta=1 \):
+
+\[ \frac{dm}{dt} = \frac{d}{dt} \int_V \rho \,dV + \int_S \rho (\overline{v}.\hat{n}) \,dA =0 \] 
+
+\[ \int_V \frac{\partial\rho}{\partial t} \,dV + \int_S \rho (\overline{v}.\hat{n}) \,dA =0 \]
+
+\[ \int_S \rho (\overline{v}.\hat{n}) \,dA = \dot{m}_S = \dot{m}_{out} - \dot{m}_{in}\]
+
+This term is nothing but the mass flow through the control surface.
+
+If flow within the control volume is steady, then \( \frac{\partial\rho}{\partial t} = 0 \), which means that:
+
+\[ \int_S \rho(\overline{v}.\hat{n}) \,dA = \dot{m}_s = 0 \]
+
+This states that in steady flow, the mass flows entering and leaving the control volume must balance exactly and the total mass flow is zero.
+
+For incompressible fluid, \( \rho =0 \). Hence, the volume flow \( Q \):
+\[ \int_S (\overline{v}.\hat{n}) \,dA = 0 \]
+
+\section{The linear momentum equation}
+
+For \( B=mv \) and \( \beta=v \):
+
+\[ \frac{d(mv)}{dt}_{sys} = \frac{d}{dt} \int_V v \rho \,dV + \int_S v \rho (\overline{v}_r.\hat{n}) \,dA \]
+
+Let us look at the second term here. We know that momentum flow rate across a surface is given by -
+\[\dot{M}_s = \dot{m}\overline{v}\]
+
+For small element dA -
+
+\[ d\dot{M}_s = (\rho \ d\overline{A} \ . \ \overline{v} ) \ \overline{v}\]
+
+\[ \int_S v \rho (\overline{v}_r.\hat{n}) \,dA = \dot{M}_s \]
+
+This term is nothing but the momentum flow through the control surface.
+For a one-dimensional inlet and outlet, this can be represented as:
+
+\[ \dot{M}_s = \Sigma (\dot{m}_i v_i)_{out} - \Sigma (\dot{m}_i v_i)_{in} \]
+
+\section{Bernoulli equation}
+
+A classical linear momentum analysis is a relation between pressure, velocity, and elevation in frictionless flow.\\
+
+Consider an elemental fixed streamtube control volume of variable area \( A(s) \) and length \( ds \), where \( s \) is the streamline direction.
+
+The properties \( (\rho, V, p) \) may vary with \( s \) and time but are assumed to be uniform over the cross-section \( A \).
+The streamtube orientation \( \theta \) is arbitrary, with an elevation change \( dz = ds \sin\theta \). Friction on the streamtube walls is neglected.\\
+
+Conservation of mass for this elemental control volume yields:
+
+\[ \frac{d}{dt} \int_V \rho \,dV + \dot{m}_{out} - \dot{m}_{in} = 0  \approx \frac{\partial\rho}{\partial t}dV + d \dot{m} \]
+
+where \( \dot{m} = \rho Av\) and \( dV \approx A ds\) The desired form of mass conservation becomes - 
+
+\[ d \dot{m} = d(\rho Av) = -\frac{\partial \rho}{\partial t}A ds\]
+
+Now we write the linear momentum relation in the streamwise direction:
+
+\[ \Sigma dF_s = \frac{d}{dt}(\oint_V v\rho dV) + (\dot{m}v)_{out} - (\dot{m}v)_{in} \approx \frac{\partial}{\partial t}(\rho v) A ds + d(\dot{m}v) \]
+
+\[ \Sigma dF_s = \frac{\partial \rho}{\partial t}vAds + \frac{\partial v}{\partial t} \rho A ds + \dot{m}dv + vdm = \dot{m}dv + \frac{\partial v}{\partial t} \rho A \ ds\]
+
+
+If we neglect the shear force on the walls the forces are due to pressure and gravity.
+The streamwise gravity force of the fluid within control volume:
+
+\[ dF_{s,grav} = -dW \ sin \theta = -\rho g A \ ds \ sin\theta = - \rho g A \ dz\]
+
+\[ dF_{press} = \frac{1}{2} dp \ dA - (p+dp)(A+dA) + pA \approx -Adp\]
+
+We equate total force we get from here to the force derived from linear momentum equation:
+
+\[-\rho g A dz - A dp = \dot{m}dv + \frac{\partial v}{\partial t} \rho A \ ds\]
+
+Diving by \(\rho A\) on both sides
+\[ -gz - \frac{dp}{\rho} = vdv + \frac{\partial v}{\partial t} ds\]
+
+\[ \frac{\partial v}{\partial t} ds + \frac{dp}{\rho} + vdv + gz = 0 \]
+
+This is the Bernoulli equation for unsteady frictionless flow along a streamline.
+For steady incompressible flow - \\
+
+Steady condition - \(\frac{\partial v}{\partial t} =0\)
+
+Incompressible condition - \(\rho = constant \)
+
+\[ \frac{P_2-P_1}{\rho} + \frac{1}{2}(v_2^2 - v_1^2) + g(z_2-z_1) = 0\]
+
+This is the bernoulli equation for Steady incompressible frictionless flow along a streamline.
+
+\section{Energy equation}
+We apply RTT to the first law of thermodynamics. The dummy variable B becomes energy E. Hence \( \beta =\frac{dE}{dm} = e\)
+
+\[ \frac{dE}{dt} =\frac{dQ}{dt} - \frac{dW}{dt} = \frac{d}{dt} \int_V e\rho \,dV + \int_S e\rho (\overline{v}.\hat{n}) \,dA \]
+The system energy per unit mass e may be of several types:
+
+\[ e = e_{internal}+e_{kinetic}+e_{potential}+e_{other}\]
+
+where \(e_{other}\) could encompass chemical reactions, nuclear reactions and electrostatic and magnetic field effects.
+
+\[e = \hat{u} + \frac{1}{2}v^2 + gz\]
+
+The heat and work terma can be examined in detail. \(\dot{Q}\) would be broken down into conduction,
+convection and radiation effects. Here we leave the term untouched.
+
+We divide work term into 3 parts.
+
+\[ \dot{W}=\dot{W}_{shaft} + \dot{W}_{press} + \dot{W}_{viscous stresses} = \dot{W}_{s} + \dot{W}_{p} + \dot{W}_{v} \]
+
+Note that the work done by gravity has been included as potential energy in e. The shaft work isolates theportion of the work
+that is deliberately done by a machine ( pump impeller, fan blade, piston). The calculations of the work done by turbomachines will be performed later.
+
+The rate of work \(\dot{W}_p\) done by pressure forces occurs at the surface only.
+\[\dot{W}= F.v\]
+For small element dA -
+\[ d \dot{W}_P = P \ (d \overline{A} . \overline{v}) = p (\overline{v}.\hat{n}) dA \]
+
+\[ \dot{W}_p = \int_S p(\overline{v}.\hat{n}) dA\]
+
+The shear work due to viscous stresses occurs at the control surface and consists of the product of each viscous stress
+(one normal and two tangential) and the respective velocity component:
+
+\[d\dot{W}_v = -\tau . \overline{v}\ dA\]
+
+\[\dot{W}_v = \int_S -\tau . \overline{v}\ dA\]
+
+where \(\tau\) is the stress vector on the elemental surface dA.
+
+\section{Summary}
+This chapter has analyzed four basic equations of fluid mechanics: conservation of mass, linear momentum, angular momentum and energy.
+
+\chapter{Differential Relations for fluid flow}
+In analyzing fluid motion we might take one of the two paths 
+1. Seeking an estimate of gross effects (mass flows, induced force, energy change) over a finite region or control volume.
+2. Seeking point-by-point details of flow pattern by analyzing an infinitesimal region of flow.
+
+In this chapter we apply our four basic conservations laws to an infinitesimally small contol volume.
+
+
+\section{Differential equation of mass conservation}
+The flow through each side of the element is approximately one-dimensional and so the appropriate
+mass conservation relation to use here is :
+
+\[ \int_V \frac{\partial \rho}{\partial t} dV + \Sigma (\rho_i A_i \overline{V}_i)_{out} - \Sigma (\rho_i A_i\overline{V_i})_{in} = o\]
+
+\[ \int_V \frac{\partial \rho}{\partial t} dV + \dot{m}_{out} - \dot{m}_{in} = 0 \]
+The element is so small that the volume integral simply reduces to a differential term:
+
+\[ \int_V \frac{\partial \rho}{\partial t} dV \approx \frac{\partial \rho}{\partial t} dx dy dz \]\\
+
+The mass flow terms occur on all six faces, three inlets and threee outlets.
+
+\noindent
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|>{\columncolor[HTML]{FF99CC}}c|c|c|}
+    \hline
+    \rowcolor{pink}
+    \textbf{Face} & \textbf{Inlet mass flw} & \textbf{Outlet mass flw} \\ \hline
+    $x$ & $\rho u \, dy \, dz$ & $\left[ \rho u + \frac{\partial}{\partial x} (\rho u) \, dx \right] dy \, dz$ \\ \hline
+    $y$ & $\rho v \, dx \, dz$ & $\left[ \rho v + \frac{\partial}{\partial y} (\rho v) \, dy \right] dx \, dz$ \\ \hline
+    $z$ & $\rho w \, dx \, dy$ & $\left[ \rho w + \frac{\partial}{\partial z} (\rho w) \, dz \right] dx \, dy$ \\ \hline
+    \end{tabular}
+\end{table}
+
+The element volume cancels out of all terms, leaving a partial differential equation involving the derivatives of density and velocity:
+
+\[\frac{\partial \rho}{\partial t} \, dx \, dy \, dz + \frac{\partial}{\partial x} (\rho u) \, dx \, dy \, dz + \frac{\partial}{\partial y} (\rho v) \, dx \, dy \, dz + \frac{\partial}{\partial z} (\rho w) \, dx \, dy \, dz = 0\]
+
+\begin{tcolorbox}[colback=pink!30!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+\[
+\frac{\partial \rho}{\partial t} + \frac{\partial}{\partial x} (\rho u) + \frac{\partial}{\partial y} (\rho v) + \frac{\partial}{\partial z} (\rho w) = 0 \]
+\end{tcolorbox}
+
+This is the desired result: conservation of mass for an infinitesimal control volume. It is called equation of continuity
+because it requires no assumptions except that density and velocity are continuum functions. That isthe flow may be either steady
+or unsteady, viscous or frictionless, compressible or incompressible. However the equation does not allow
+for any source sink singularities within the element.
+
+The vector gradient operator 
+
+\[ \nabla = i \frac{\partial}{\partial x} + j \frac{\partial}{\partial y} + k \frac{\partial}{\partial z}\]
+
+enables us to rewrite the equation of continuity in compact form.
+
+\[ \nabla.(\rho \overline{v}) = \frac{\partial}{\partial x}(\rho u) + \frac{\partial}{\partial y}(\rho v) + \frac{\partial}{\partial z}(\rho w) \]
+So the compact form of continuity relation is -
+
+\[ \frac{\partial \rho}{\partial t} + \nabla.(\rho \overline{v}) = 0\]
+
+In this vector form the equatio is quite general and readily be convertedto other coordinate systems.
+In cyclindrical polar coordinates the continuity equation looks like:
+
+\section{Differential equation of linear momentum}
+
+
+\section{Differential equation of energy}
+\section{Boundary conditions for basic equations}
+\section{The stream function}
+\section{Vorticity and irrotationality}
+\chapter{Dimensional Analysis and Similarity}
+In this chapter we discuss the planning, presesntation and interpretation of experimental data.
+We show that such data is best represented in dimensionless form.
+\section{Introduction}
+Dimensional analysis is the method for reducing the number and complexity of experimental variables that affect a given physical phenomenon
+by using a compacting technique. If a phenomenon depends on n dimensional variables, dimensional analysis will reduce the problem only to
+k dimensional variables. In fluid mechanics the four basic dimensions are usuallly mass M, length L, time T and temperature \(\theta\). Alternatively
+one uses \(FLT\theta\) system with force replacing mass.
+
+Although the purpose is to reduce variables and group them in dimensionlesss form,
+dimensional anaylsis has several side benefits. The first is enormous savings in time and money.
+
+Let us take an example.
+Suppose we know that the force F on a particular body shape immersed in a stream of fluid depended only on body length L, stream velocity v,
+fluid density \(\rho\) and fluid viscosity \(\mu\); that is 
+
+\[ F=f(L, v, \rho, \mu)\]
+
+Suppose the further geometry and flow conditions are so complicated that our integral theories and differential equations
+fail to yeild a solution. Then we must find the function f experimentally or numerically.
+Lets say it takes about 10 points to define a curve. To find effect of L on we have to run the experiment for 10 lengths L.
+For each L we need 10 values each of v, \(\rho\) and \(\mu\) making it a total of \(10^4\) experiments. however with dimensional analysis we can
+immediately reduce it to a equivalent form.
+
+The function g is mathematically different from function f but provides the same information. We can establish g by running
+the experiment for only 10 values. We do not have to vary 
+
+
+\section{Principle of dimensional Homogenity}
+The rule of dimensional homogeneity (PDH) can be stated as follows:
+
+If an equation truly expresses a proper relationship between variables in a physical process, it will be dimensionally homogenous; that is,
+each of its additive terms will have the same dimensions.
+\section{The pi theorem}
+
+There are several methods of reducing a number of dimensional variables into smaller number of dimensionless groups. Let us look at Buckingham Pi theorem.
+The name pi comes from the mathematical notation \(\Pi\) meaning product of variables. 
+
+If a physical process satisfies the PDH and involves n dimensional variables, it can be reduced to a relation between only k dimensionless variables or \(\Pi\)s. The
+reduction j = n-k equals the maximum number of variables that do not form a pi among themselves and is always less than or equal to the number of dimensions describing 
+the variables.
+
+Find the reduction j, then select the j scaling variables. Each desired pi group will be a power product of these j variables plus one 
+additional variable which is assigned any convinient nonzero exponent. 
+
+Example1: The power input P to a centrifugal pump is a function of the volume flow Q, impeller diameter D, rotational rate \(\Omega\) and the density
+\(\rho\) and viscosity \(\mu\) of the fluid:
+
+\[P=f(Q,D,\Omega,\rho,\mu)\]
+
+\section{Non-dimensionalization of the basic equations}
+We could use the pi theorem method  to analyze problem after problem, finding the dimensionless parameters which govern in each case. An alternative and very powerful technique 
+is to attack the basic equations of flow. Even though these equations cannot be solved in general they will reveal basic dimensionless parameters. The boundary conditions
+must also be non-dimensionalized.
+\section{Dimensionless Parameters}
+In the continuity equation there are no parameters. The Navier-stokes equation contains one, generally accepted as the most important parameter in fluid mechanics
+
+\[Reynolds Number Re = \frac{\rho UL}{\mu}\]
+
+The reynolds number is always important with or without free surface and can be neglected only in flow regions away from high-velocity gardients.
+The no-slip and inlet-exit boundary conditions contain no parameters. The free-surface-pressure condition contains three:
+
+\[Euler number(pressure coefficient) Eu = \frac{p_a}{\rho U^2}\]
+
+This is rarely important unless the pressure drops low enough to cause cavitation in a liquid.
+
+\begin{center}
+    \begin{tabular}{|>{\centering\arraybackslash}p{3cm}|
+                    >{\centering\arraybackslash}p{3.8cm}|
+                    >{\centering\arraybackslash}p{4.5cm}|
+                    >{\centering\arraybackslash}p{3cm}|}
+    \hline
+    \textbf{Parameter} & \textbf{Definition} & \textbf{Qualitative ratio of effects} & \textbf{Importance} \\ \hline
+    Reynolds number & $\text{Re} = \frac{\rho U L}{\mu}$ & $\frac{\text{Inertia}}{\text{Viscosity}}$ & Almost always \\ \hline
+    Mach number & $\text{Ma} = \frac{U}{c}$ & $\frac{\text{Flow speed}}{\text{Sound speed}}$ & Compressible flow \\ \hline
+    Froude number & $\text{Fr} = \frac{U}{\sqrt{gL}}$ & $\frac{\text{Inertia}}{\text{Gravity}}$ & Free-surface flow \\ \hline
+    Weber number & $\text{We} = \frac{\rho U^2 L}{\gamma}$ & $\frac{\text{Inertia}}{\text{Surface tension}}$ & Free-surface flow \\ \hline
+    Rossby number & $\text{Ro} = \frac{U}{L \omega_{\text{lat}}}$ & $\frac{\text{Flow velocity}}{\text{Coriolis effect}}$ & Geophysical flows \\ \hline
+    Cavitation number (Euler number) & $\text{Ca} = \frac{P - P_v}{\frac{1}{2} \rho U^2}$ & $\frac{\text{Pressure}}{\text{Inertia}}$ & Cavitation \\ \hline
+    Prandtl number & $\text{Pr} = \frac{\mu c_p}{k}$ & $\frac{\text{Dissipation}}{\text{Conduction}}$ & Heat convection \\ \hline
+    Eckert number & $\text{Ec} = \frac{U^2}{c_p T_0}$ & $\frac{\text{Kinetic energy}}{\text{Enthalpy}}$ & Dissipation \\ \hline
+    Specific-heat ratio & $k = \frac{c_p}{c_v}$ & $\frac{\text{Enthalpy}}{\text{Internal energy}}$ & Compressible flow \\ \hline
+    Strouhal number & $\text{St} = \frac{\omega L}{U}$ & $\frac{\text{Oscillation}}{\text{Mean speed}}$ & Oscillating flow \\ \hline
+    Roughness ratio & $\frac{\epsilon}{L}$ & $\frac{\text{Wall roughness}}{\text{Body length}}$ & Turbulent, rough walls \\ \hline
+    Grashof number & $\text{Gr} = \frac{g \beta \Delta T L^3 \rho^2}{\mu^2}$ & $\frac{\text{Buoyancy}}{\text{Viscosity}}$ & Natural convection \\ \hline
+    Rayleigh number & $\text{Ra} = \frac{g \beta \Delta T L^3 \rho^2 c_p}{\mu k}$ & $\frac{\text{Buoyancy}}{\text{Viscosity}}$ & Natural convection \\ \hline
+    Temperature ratio & $\frac{T_s}{T_0}$ & $\frac{\text{Wall temperature}}{\text{Stream temperature}}$ & Heat transfer \\ \hline
+    Pressure coefficient & $C_p = \frac{P - P_\infty}{\frac{1}{2} \rho U^2}$ & $\frac{\text{Static pressure}}{\text{Dynamic pressure}}$ & Aerodynamics, hydrodynamics \\ \hline
+    Lift coefficient & $C_L = \frac{L}{\frac{1}{2} \rho U^2 A}$ & $\frac{\text{Lift force}}{\text{Dynamic force}}$ & Aerodynamics, hydrodynamics \\ \hline
+    Drag coefficient & $C_D = \frac{D}{\frac{1}{2} \rho U^2 A}$ & $\frac{\text{Drag force}}{\text{Dynamic force}}$ & Aerodynamics, hydrodynamics \\ \hline
+    Friction factor & $f = \frac{\Delta h}{(\frac{1}{2g})(\frac{L}{d})}$ & $\frac{\text{Friction head loss}}{\text{Velocity head}}$ & Pipe flow \\ \hline
+    Skin friction coefficient & $c_f = \frac{\tau_w}{\frac{1}{2} \rho U^2}$ & $\frac{\text{Wall shear stress}}{\text{Dynamic pressure}}$ & Boundary layer flow \\ \hline
+    \end{tabular}
+\end{center}
+
+\section{Modeling and its pitfalls}
+\subsection{Geometric similarity}
+\subsection{Kinematic similarity}
+\subsection{Dynamic similarity}
+\chapter{Viscous flow in ducts}
+\section{Reynolds number regimes}
+Now that we have derived and studied the basic flow equations you would think we could just derive beautiful solutions
+illustrating the full range of fluid behaviour expressing all the results in dimensionless form using the tool of dimensional analysis.
+
+The fact of matter is that no general analysis of fluid motion exists. The reason is that a profound change in fluid behavious exists
+oocurs at moderate Reynolds numbers. The flow ceases being smooth and steady (laminar) and becomes fluctuating and agitated(turbulent).
+The changeover is called transition to turbulence. Transition depends on many effects such as wall roughness or fluctuations in inlet stream
+but the primary parameter is reynolds number.
+
+0<Re<1 : highly viscous laminar "creeping motion"
+1<Re<100 : Laminar, strong reynolds number dependence
+100 <Re< 1000 : Laminar, boundary layer theory useful
+\(10^3\) <Re \(10^4\) : transition to turbulence
+\(10^4\) <Re \(10^6\) : turbulent moderate reynolds number dependence
+\(10^6\) <Re \(\infty\) : turbulent, slight reynolds number dependence
+
+These respective ranges vary somewhat with flow geometry, surface roughnessetc. The great majority of analyses are concerned with laminar 
+flow or with turbulent flow, and one should not design a flow operation in the transition region.|
+
+We calculate the critical Re value of transition to turbulence through experiments. By introducing a dye streak into a pipe flow Reynolds
+could observe transition and turbulence. The accepted design value for pipe flow transition is taken as - 
+
+\[Re_{d,crit} \approx 2300\]
+
+This is accurate for commercial pipes although with special care in providing a rounded entrance, smooth walls and steady inlet stream it can be
+delayed until much higher values. Note that the value of 2300 is for transition in pipes. Other geometries such as plates, airfoils, cylinders
+and spheres have completely different transition reynolds numbers.
+
+Laminar flow theory is now well developed and many solutions are known but no analyses can simulate the fine-scale random fluctuations of
+turbulent flow. Therefore turbulent flow theory is semiemperical based on dimensional analysis and physical reasoning; it is concerned with the 
+mean flow properties only and the mean of the fluctuations not their rapid variations.
+
+\section{Internal flow}
+Both laminar and turbulent flow may be either internal(bounded by walls) or external(unbounded). An internal flow is constrained by bounding walls
+and the viscous effects will grow and meet and permeate the entire flow. There is a entrance region where a nearly inviscid upstream flow
+converges and enters the tube. Viscous boundary layer grows downstreamretarding the axial flow at the wall and thereby accelerating the
+center core flow to maintain continuity equation.
+
+At a finite distance from the entrance, the boundary layers merge and the inviscid core disappears. The tube flow is then entirely viscous and the
+axial velocity adjusts slightly further until \(x=L_e\) and it no longer changes with x and is said to be fully developed. Note that this is true for
+both laminar and turbulent flows.
+
+Dimensional analysis shows that reynolds number is the only parameter affecting the entrance length.
+
+\[L_e = f(d, V, \rho, \mu) \\\ V=\frac{Q}{A} \]
+
+then
+\[ \frac{L_e}{d} = g(\frac{\rho Vd}{\mu}) = g(Re_d)\]
+
+For laminar flow the accepted correlation is 
+
+\[ \frac{L_e}{d} = 0.06Re_d\]
+
+In turbulent flow the boundary layers grow faster and \(L_e\) is relatively shorter. For decades the relation \(\frac{L_e}{d}=4.4 Re_d^{\frac{1}{6}}\) 
+was favoured but the recent CFD results, communicated by Fabian Anselmet and seperately by Sukanta Dash indicate better turbulence entrance length correlation -
+
+\[\frac{L_e}{d}=1.6 Re_d^{\frac{1}{4}}\] for \(Re_d < 10^78\)
+
+
+\section{Head loss-The friction factor}
+Consider incompressible steady fully developed flow in a pipe with a uniform cross section(not necessarily circular).
+The one-dimensional continuity equation reduces to -
+
+\[ Q_1=Q_2 = const \ \ or \ \ V_1=V_2=V\]
+since the pipe is of constant area and where V is the average velocity. The steady flow energy equation becomes - 
+
+\[ (\frac{p}{\rho g}+ \alpha \frac{V^2}{2g} +z)_1 = (\frac{p}{\rho g}+ \alpha \frac{V^2}{2g} +z)_2 + h_f\]
+For fully developed flow the velocity profile shape is same at sections 1 and 2. Thus \(\alpha_1 =\alpha_2\) and the equation reduces to -
+
+\[ h_f = (z_1-z_2) + (\frac{p_1}{\rho g} - \frac{p_2}{\rho g} ) = \Delta z + \frac{\Delta p}{\rho g}\]
+
+Finally apply the momentum relation to control volume -
+\[ \Sigma F_x = \Delta p (\pi R^2) + \rho g(\pi R^2)Lsin \phi - \tau_w(2\pi R)L = \dot{m}(V_2-V_1)=0\]
+Rearranging this we find that head loss is also related to wall shear stress:
+\[ \Delta z +\frac{\Delta p}{\rho g} = h_f = \frac{2 \tau_w l}{\rho g R} = \frac{4 \tau_w L}{\rho g d}\]
+
+How should we correlate the head loss for pipe flow problems ? From the above equation we see that \(h_f\) is
+proportional to (L/d) and data such as Hagen's show that for flows \(h_f\) is approximately proportional to
+\(V^2\). Hence the proposed correlation is - 
+
+\begin{tcolorbox}[colback=pink!30!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+    \[
+   h_f = f \frac{L}{d} \frac{V^2}{2g} \ where f=fcn(Re_d, \frac{\epsilon}{d}, duct shape)\]
+\end{tcolorbox}
+The dimensionless parameter f is called the Darcy friction factor. The quantity \(\epsilon\) is the wall roughness height which is important in
+turbulent but not in laminar pipe flow. We added duct shape effect to remind us that square, triangular and other non-circular ducts have a somewhat different
+friction factor than circular pipe.
+
+By equating the 2 equations we have an alternative form of friction factor:
+
+\[ f = \frac{8 \tau_w}{\rho V^2}\]
+\textbf{Note that the above theory and formula are equally true for both laminar and turbulent flow.}
+
+\section{Laminar fully developed pipe flow}
+Analystical solutions can be readily derived for laminar flows. Consider fully developed Poiseullie flow in a 
+round pipe of diameter d, radius R.
+
+\[ u = u_{max}\left( 1 -\frac{r^2}{R^2}\right) \ \ where \ \ u_{max} = \left( - \frac{dp}{dx} \right) \frac{R^2}{4\mu} \ \ and \ \ \left( -\frac{dp}{dx}\right) = \frac{\Delta p + \rho g\Delta z}{L} \]
+
+\[V=\frac{Q}{A} = \frac{u_{max}}{2} = \left(\frac{\Delta p + \rho g\Delta z}{L} \right) \frac{R^2}{8\mu}\]
+
+\[ Q = \int udA = \pi R^2 V = \frac{\pi R^4}{8 \mu} \left(\frac{\Delta p + \rho g\Delta z}{L} \right) \]
+
+\[ \tau_w = \left| \mu \frac{du}{dr} \right|_{r=R} = \frac{4 \mu V}{R} = \frac{R}{2} \left(\frac{\Delta p + \rho g\Delta z}{L} \right)\]
+
+\[ h_f = \frac{ 32 \mu LV}{\rho g d^2} = \frac{128 \mu L Q}{\pi \rho g d^4}\]
+
+The poiseulli flow friction factor can be easily determined:
+\begin{tcolorbox}[colback=pink!30!white, colframe=black, width=\textwidth, boxrule=0.5mm, sharp corners, left=1mm, right=1mm, top=1mm, bottom=1mm]
+    \[
+  f_{lam} = \frac{\tau_{w, lam}}{\rho V^2} = \frac{8(8\mu V/d)}{\rho V^2} = \frac{64}{\rho Vd /\mu} = \frac{64}{Re_d}\]
+\end{tcolorbox}
+Hence in laminar flow the pipe friction factor decreases inversely with Reynolds number.
+
+\section{Flow in non-circular ducts}
+\section{Turbulence Modelling}
+Throughout this chapter we assume constant density and viscosity and no thermal
+interaction, so that only the continuity and momentum equations are to be solved for
+velocity and pressure.
+
+\subsection{Reynolds Time Averaging concept}
+For turbulent flow because of the fluctuations every velocity and pressure term is a rapidly
+varying random function of time and space. At present our mathematics cannot handle such instantaneous fluctuating variables. Our attention
+is towards the average or mean values of velocity, pressure, shear stress etc in high reynolds number flow. This approach led Osborne 
+Reynolds to rewrite equations in terms of mean or time-averaged turbulent variables.
+
+The time mean of a turbulent function u(x, y, z, t) is defined by 
+
+\[ \overline{u} = \frac{1}{T} \int_{0}^{T} u dt \]
+
+where T is an averaging period taken to be longer than any significant period of the
+fluctuations themselves.
+
+The fluctuation u' is defined as the deviation of u from its average value.
+
+\[ \overline{u '} = \frac{1}{T} \int_{0}^{T} ( u - \overline{u}) dt = \overline{u} - \overline{u} = 0 \]
+
+It follows from definition that a fluctuation has zero mean value. 
+
+However the mean square of fluctutation is not zero and is the measure of intensity of turbulence :
+
+\[ \overline{{u'}^2} = \frac{1}{T} \int_{0}^{T} {u'}^2 dt \neq 0\]
+
+Nor in general are the mean fluctutation products such as \(\overline{u'v'}\) and \(\overline{u'p'}\) zero in a typical turbulent flow.
+
+Reynolds' idea was to split each property into mean plus fluctuating variables:
+
+\[ u = \overline{u} + u'\ \ , v = \overline{v} + v' \ \ , w = \overline{w} + w', \ \  p = \overline{p} + p' \]
+
+The continuity relation reduces to - 
+
+\[ \frac{\partial \overline{u}}{\partial x} + \frac{\partial \overline{v}}{\partial y} + \frac{\partial \overline{w}}{\partial z} = 0 \] 
+
+which is no different from a laminar continuity relation.
+However each component of the momentum equation after time-averaging will contain mean values plus three mean products, or correlations or
+fluctuating velocities 
+\section{Turbulent pipe flow}
+For turbulent pipe flow we need not solve a differential equation but instead proceed with logarithmic law 
+
+\[ \frac{u(r)}{u^*} = \frac{1}{k} ln \frac{(R-r)u^*}{v} + B\]
+\section{Flow in non-circular ducts}
+Hydraulic diameter is the best approximation used for such cases. For non-circular duct the control volume concept is still valid.
+\chapter{Flow past immersed bodies}
+
+\chapter{Potential flow and computational fluid dynamics}
+\section{Elementary Plane flow solutions}
+We study inviscid incompressible flows that possesss both stream function and a velocity potential.
+\subsection{Uniform stream in x-direction}
+
+\section{Superposition of Plane Flow Solutions}
+\section{Plane Flow past Closed-Body Shapes}
+\section{Other Plane Potential flows}
+\section{Numerical analysis}
+When potential flow involves complicated geometries or unusual stream conditions the classical 
+superposition scheme becomes less attractive. Numerical analysis is the appropriate 
+modern approach and the following approaches are in use:
+\subsection{The finite element method}
+\subsection{The finite difference method}
+\subsection{The boundary element method}
+
+\chapter{Compressible Flow}
+\chapter{Open-channel flow}
+Open channel flow is the flow of a liquid in conduit with a free surface. We see the elementary analysis of such flows which are dominated
+by effects of gravity. The prescence of a free surface which is essentially at atmospheric pressure both helps and hurts the analysis. It helps
+because the pressure can be taken constant along the free surface. Unlike closed ducts the pressure gradient is not a direct factor in
+open-channel flow where the balance of forces is confined to gravity and friction.The free surface complicates the analysis because its shape
+is priori unknown.
+
+
+\section{Uniform flow - Chezy formula}
+\section{Efficient Uniform flow channels}
+
+\part{Wave mechanics}
+\chapter{Review of fluid mechanics for wave hydrodynamisc}
+\section{Models of flow}
+\subsection{Fixed finite control volume}
+\subsection{Moving finite control volume}
+\subsection{Fixed infinitesimally small element}
+\subsection{Moving infinitesimally small element}
+\chapter{Small Amplitude wave Theory}
+\section{Boundary value problems}
+In formulating the small-amplitude water wave problem, it is useful to review the structure of boundary value problems.
+
+\subsection{Governing differential Equation}
+With the assumption of irrotational motion and an incompressible fluid, a velocity potential exists which should satisfy the continuity equation.
+
+The Laplace equation occurs frequently in many fields of physics and engineering, and numerous solutions to this equation exist.
+
+\[ \nabla . \overline{v} =0 \]
+
+A velocity potential exists, and we call it \( \phi \):
+
+\[ \nabla . \nabla\phi =0 \]
+
+\[ \nabla^2 \phi = \frac{\partial^2 \phi}{\partial x^2} + \frac{\partial^2 \phi}{\partial y^2} + \frac{\partial^2 \phi}{\partial z^2} \]
+
+\subsection{Boundary Conditions}
+
+Kinematic Boundary Condition - At any boundary, whether it is fixed, such as the bottom, or free, such as the water surface, which is free to deform under the influence of forces, certain physical conditions must be satisfied by the fluid velocities. These conditions on the water particle kinematics are called kinematic boundary conditions. At any surface or fluid interface, it is clear that there must be no flow across the interface; otherwise, there would be no interface.
+
+The mathematical expression for the kinematic boundary condition may be derived from the equation which describes the surface that constitutes the boundary. Any fixed or moving surface can be expressed in terms of:
+
+\[ F(x, y, z, t) = 0 \]
+
+Bottom Boundary Condition (BBC)
+
+Kinematic Free Surface Boundary Condition (KFSBC)
+
+Dynamic Free Surface Boundary Condition (DFSBC)
+
+Lateral Boundary Condition (LBC)
+
+\section{Solution to linearised water wave problem with horizontal bottom}
+
+A convenient method for solving some linear partial differential equations is called separation of variables. The assumption behind its use is that the solution can be expressed as a product of terms, each of which is a function of only one of the independent variables. For our case:
+
+\[ \phi(x,z,t)=X(x)Z(z)T(t) \]
+
+Since we know that \( \phi \) must be periodic in time by the lateral boundary conditions, we can specify \( T(t) = \sin \sigma t \):
+
+\[ \sin\sigma t = \sin\sigma (t+T) \]
+\[ \sin\sigma t = \sin\sigma t \cos\sigma T + \cos\sigma t \sin\sigma T \]
+
+Which is true for \( \sigma T = 2\pi \).
+
+The velocity potential now takes the form:
+\[ \phi(x,z,t) = X(x)Z(z)\sin\sigma t \]
+
+Substituting this in the Laplace equation:
+\[ \frac{d^2X(x)}{dx^2}Z(Z)\sin \sigma t + X(x)\frac{d^2Z(z)}{dz^2}\sin\sigma t = 0 \]
+
+Dividing by \( \phi \):
+\[ \frac{1}{X}\frac{\partial^2 X}{\partial x^2} + \frac{1}{Z}\frac{\partial^2 Z}{\partial z^2} = 0 \]
+
+The first term of the equation depends on \( x \) alone while the second term depends on \( z \) alone. If we consider a variation in \( z \) holding \( x \) constant, the second term could conceivably vary, whereas the first term could not. This would give a nonzero sum and thus the equation would not be satisfied. The only way that the equation would hold is if each term is equal to the same constant except for a sign difference, that is:
+
+\[ \frac{1}{X(x)}\frac{\partial^2 X}{\partial x^2} = -k^2 \] 
+\[ \frac{1}{Z(z)}\frac{\partial^2 Z}{\partial z^2} = +k^2 \]
+
+We call \( k \) the separation constant.
+Three possible cases may now be examined depending on the nature of \( k \).
+
+All solutions in the table satisfy the Laplace equation; however, some are not periodic in \( x \). The solution is spatially periodic only when \( k \) is real and non-zero. Therefore we have as a solution to the Laplace equation the velocity potential:
+
+\[ \phi(x,z,t) = (A\cos kx + B\sin kx)(Ce^{kz}+De^{-kz})\sin\sigma t \]
+
+\subsection{Application on boundary conditions}
+
+\textbf{Lateral Periodicity condition}\\
+To satisfy the spatial periodicity requirement:
+\[ A\cos kx + B\sin kx = A\cos k(x+L)+B\sin k(x+L) = A(\cos kx \cos kL - \sin kx \sin kL) + B(\sin kx \cos kL + \cos kx \sin kL) \]
+
+This is satisfied only for \( \cos kL=1 \) and \( \sin kL=0 \), which means \( kL=2\pi \) or:
+
+\( k \) (called the wave number) = \( \frac{2\pi}{L} \).
+
+Note: Using the superposition principle, we can divide \( \phi \) into several parts. For present purposes, let's keep:
+\[ \phi = A\cos kx(Ce^{kz}+De^{-kz})\sin\sigma t \]
+
+\textbf{Bottom boundary condition for horizontal bottom:}\\
+Substituting in the bottom boundary condition yields:
+
+\[ w= -\frac{\partial\phi}{\partial z} = -A\cos kx(kCe^{kz}-kDe^{-kz})\sin\sigma t =0 \text{ on } z=-h \]
+
+For this equation to be true on any \( x, t \):
+\[ C=De^{2kh} \] 
+
+The velocity potential now becomes:
+\[ \phi =A\cos kx(De^{2kh}e^{kz}+De^{-kz})\sin\sigma t \]
+\[ \phi =AD\cos kx(e^{k(h+z)}+e^{-k(h+z)})\sin\sigma t \]
+\[ \phi =G \cos kx \cosh k(h+z)\sin\sigma t \]
+
+\textbf{Dynamic Free Surface Boundary Condition:}\\
+A convenient method used to evaluate the condition, then, is to evaluate it on \( z=\eta(x,t) \) by expanding the value of the condition at \( z=0 \) by Taylor series:
+
+\[ \left(gz-\frac{\partial\phi}{\partial t} + \frac{u^2+w^2}{2}\right)_{z=\eta} = \left(gz-\frac{\partial\phi}{\partial t} + \frac{u^2+w^2}{2}\right)_{z=0} + \eta\left[g-\frac{{\partial}^2\phi}{\partial z \partial t} + \frac{1}{2}\frac{\partial}{\partial z}(u^2 + w^2)\right] + ..... = C(t) \]
+
+Now, if we consider infinitesimally small waves, \( \eta \) is small and therefore it is assumed velocities are small. If we neglect these small terms, we have:
+
+\[ \left( -\frac{\partial\phi}{\partial t} + g\eta \right)_{z=0} = C(t) \]
+
+This process is called linearization. We have retained only the terms that are linear in our variables:
+
+\[ \eta=\frac{1}{g} \frac{\partial\phi}{\partial t}\bigg|_{z=0} + \frac{C(t)}{g} \]
+
+If we substitute the velocity potential:
+
+\[ \eta = \frac{G\sigma}{g} \cos kx \cosh k(h+z) \cos \sigma t \bigg|_{z=0} + \frac{C(t)}{g} \]
+\[ \eta = \left[\frac{G\sigma \cosh kh}{g}\right] \cos kx \cos \sigma t \]
+
+Since by definition \( \eta \) will have zero spatial and temporal mean, we have \( C(t)=0 \).
+
+We now want to write \( \eta \) in a simple form as:
+\[ \eta=\frac{H}{2} \cos kx \cos \sigma t \]
+
+Hence, we substitute \( G \) with:
+\[ G = \frac{Hg}{2\sigma \cosh kh} \]
+
+The velocity potential is now:
+\[ \phi = \frac{Hg\cosh k(h+z)}{2\sigma \cosh kh} \cos kx \sin \sigma t \]
+
+\textbf{Kinematic Free Surface Boundary Condition}\\
+This relation is used to establish a relation between \( \sigma \) and \( k \). Using Taylor series to relate:
+
+
+\chapter{Nonlinear Properties derivable from small amplitude waves}
+\section{Mass transport}
+\section{Mean water level}
+\section{Mean Pressure}
+\section{Momentum Flux}
+\chapter{Engineering wave properties}
+
+\chapter{Nonlinear waves}
+
+\end{document}
